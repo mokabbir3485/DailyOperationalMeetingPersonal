@@ -1,0 +1,92 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Operational Meeting</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">DOM</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Inbox</a></li>
+                    <!--<li class="breadcrumb-item active">Battery Status</li>-->
+                </ol>
+            </div>
+            <h4 class="page-title">Inbox</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="From Date">
+                            <input class="form-control" type="text" placeholder="From Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="From Date" ng-model="FromDate" ng-change="test();">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="To Date">
+                            <input class="form-control" type="text" placeholder="To Data" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="To Data" ng-model="ToData">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select id="ddPriority" class="form-control" ng-model="ddlPriority" ng-options="Priority.PriorityName for Priority in PriorityList track by Priority.PriorityId" title="Search By Priority" placeholder="-- Search By Priority --">
+                            <option value="">-- Search By Priority --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <button id="btnSearch" class="btn btn-info" title="Search" ng-click="SalesOrderSearch();">
+                            <i class="fa fa-search-plus"></i>&nbsp;Search
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <button id="btnSearch" ng-click="reloadBtn()" class="btn btn-danger" title="Reload">
+                            <i class="fa fa-refresh"></i>&nbsp;Clear
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-repeat="aMessage in MessageList ">
+                <div class="card" ng-hide="aMessage.IsRead">
+                    <div class="card-body">
+                        <div style="float: left">
+                            <span>{{$index +1}}. {{aMessage.message}}</span>
+                        </div>
+
+                        <div style="float:right">
+                    <button class="btn btn-secondary" ng-click="aMessage.IsRead = true">Mark As Read</button>
+                </div>
+
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div>
+
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->

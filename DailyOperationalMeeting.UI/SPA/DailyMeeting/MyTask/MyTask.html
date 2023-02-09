@@ -1,0 +1,215 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+
+        
+    }
+    .mainDesign {
+        border-radius: 10px;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        line-height: 2px;
+    }
+    .btnComplete {
+        background-color: #20B852;
+        color: black;
+        font-weight: bold;
+    }
+    .btnOngoing {
+        background-color: #59D0F7;
+        color: black;
+        font-weight: bold;
+    }
+    .btnPending {
+        background-color: #ffad33;
+        color: black;
+        font-weight: bold;
+    }
+
+    textarea[readonly="readonly"], textarea[readonly] {
+        background-color: red;
+    }
+
+
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Operational Meeting</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">DOM</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">My Task</a></li>
+                    <!--<li class="breadcrumb-item active">Battery Status</li>-->
+                </ol>
+            </div>
+            <h4 class="page-title">My Task</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="From Date">
+                            <input class="form-control" type="text" placeholder="From Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="From Date" ng-model="FromDate" ng-change="test();">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="To Date">
+                            <input class="form-control" type="text" placeholder="To Data" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="To Data" ng-model="ToData">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select id="ddPriority" class="form-control" ng-model="ddlPriority" ng-options="Priority.PriorityName for Priority in PriorityList track by Priority.PriorityId" title="Search By Priority" placeholder="-- Search By Priority --">
+                            <option value="">-- Search By Priority --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <button id="btnSearch" class="btn btn-info" title="Search" ng-click="SalesOrderSearch();">
+                            <i class="fa fa-search-plus"></i>&nbsp;Search
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <button id="btnSearch" ng-click="reloadBtn()" class="btn btn-danger" title="Reload">
+                            <i class="fa fa-refresh"></i>&nbsp;Clear
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                    <div class="row" style="padding:10px">
+                        <div class="table-responsive">
+                            <div class="col-12 col-xs-12 col-sm-6 col-md-4 col-lg-4" style="float: left;" ng-repeat="aMyTask in MyTaskList">
+                                <div class="mainDesign {{aMyTask.Design}}" ng-click="">
+                                    <p style="line-height: 2px;">
+                                        <select id="ddlStatus" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.Status" ng-options="Status.StatusName for Status in StatusList track by Status.StatusId" ng-click="" ng-change="MyTaskIsComplete(aMyTask, aMyTask.Status.StatusId);">
+                                            <option value="">-- Select Status --</option>
+                                        </select>
+                                        <!--<input type="checkbox" ng-click="MyTaskIsComplete(aMyTask, aMyTask.IsComplete)" ng-model="aMyTask.IsComplete"/>-->
+                                        <textarea type="text" id="Remarks" name="Remarks" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.task_remarks" rows="1" title="Remarks" placeholder="Remarks" />
+
+                                    </p>
+                                    <p style="line-height: 2px;">Agenda: {{aMyTask.agenda_item}}</p>
+                                    <p style="line-height: 2px;">Discussion: {{aMyTask.discussion_point}}</p>
+                                    <p style="line-height: 2px;">Action: {{aMyTask.actions}}</p>
+                                    <p style="line-height: 2px;">Priority: {{aMyTask.task_priority}}</p>
+    <!--<p>
+        <table id="TaskDetail" style="width: 100%">
+            <tr>
+                <td><label>Remarks: </label> </td>
+                <td>
+                    <textarea type="text" id="Remarks" name="Remarks" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.task_remarks" rows="1" title="Remarks" placeholder="Remarks" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>Agenda: </label> </td>
+                <td><textarea id="agenda_item" name="agenda_item" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.agenda_item" rows="1" title="Agenda Item" placeholder="Agenda Item" ng-click="test();"></textarea></td>
+            </tr>
+            <tr>
+                <td><label>Discussion: </label> </td>
+                <td><textarea id="discussion_point" name="discussion_point" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.discussion_point" rows="1" title="Discussion Point" ng-click="test();" placeholder="Discussion Point"></textarea></td>
+            </tr>
+            <tr>
+                <td><label>Action: </label> </td>
+                <td><textarea id="actions" name="actions" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.actions" rows="1" title="Actions" placeholder="Actions" ng-click="test();"></textarea></td>
+            </tr>
+        </table>
+    </p>-->
+                                    <!--<p>
+        <table style="width:100%; text-align: justify">
+            <tr style="text-align: justify;">
+                <td><label>Remarks: </label> </td>
+                <td>
+                    <textarea type="text" id="Remarks" name="Remarks" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.task_remarks" rows="1" title="Remarks" placeholder="Remarks" />
+                </td>
+            </tr>
+        </table>
+    </p>-->
+                                    <!--<p style="line-height: 2px;">Agenda: {{aMyTask.agenda_item}}</p>
+    <p style="line-height: 2px;">Discussion: {{aMyTask.discussion_point}}</p>
+    <p style="line-height: 2px;">Action: {{aMyTask.actions}}</p>
+    <p style="line-height: 2px;">Priority: {{aMyTask.task_priority}}</p>-->
+                                    <!--<p>
+        <table style="width:100%">
+            <tr style="text-align: justify;">
+                <td><label>Agenda: </label> </td>
+                <td><textarea id="agenda_item" name="agenda_item" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.agenda_item" rows="1" title="Agenda Item" placeholder="Agenda Item"></textarea></td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        <table style="width:100%">
+            <tr style="text-align: justify;">
+                <td><label>Discussion: </label> </td>
+                <td><textarea id="discussion_point" name="discussion_point" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.discussion_point" rows="1" title="Discussion Point" placeholder="Discussion Point"></textarea></td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        <table style="width:100%">
+            <tr style="text-align: justify;">
+                <td><label>Action: </label> </td>
+                <td><textarea id="actions" name="actions" class="form-control {{aMyTask.Design}}" ng-model="aMyTask.actions" rows="1" title="Actions" placeholder="Actions"></textarea></td>
+            </tr>
+        </table>
+    </p>-->
+
+                                    <p style="line-height: 2px; text-align: right">
+                                        <button class="btn btn-dark btn-square btn-skew waves-effect waves-light" ng-click="UpdateMyTask(aMyTask);"><i class="mdi mdi-check-all mr-2"></i>Ok</button>
+                                    </p>
+                                </div>
+                                <br />
+                            </div>
+                        </div><!--end /tableresponsive-->
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->
+<script>
+    //$('#TaskDetail tr td').find("textarea").bind('cut paste', function (e) {
+    //        e.preventDefault();
+    //    });
+    //$('#TaskDetail tr td').find("textarea").keydown(function (event) {
+    //        return false;
+    //    });
+
+    //$('#TaskDetail tr td').find("textarea").keydown(function (e) {
+    //        var keyCode = e.keyCode || e.which;
+    //        if (keyCode === 13) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+
+
+</script>

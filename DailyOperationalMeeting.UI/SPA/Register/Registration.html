@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Daily Meeting</title>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A premium admin dashboard template by Mannatthemes" name="description" />
+    <meta content="Mannatthemes" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../Content/assets/images/favicon.ico">
+
+
+
+    <!-- App css -->
+    <link href="../Content/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="../Content/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="../Content/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <!-- App css -->
+    <link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/toastr.min.css" rel="stylesheet" />
+
+    <style>
+        .IconFixedSize{
+            margin-top:15px;
+
+        }
+        .iconSize{
+            font-size:18px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card auth-card shadow-lg" style="border-radius:10px;margin-top:-10px;">
+                        <div class="card-body">
+                            <div class="px-3">
+                                <div class="auth-logo-box">
+                                    <span>
+                                        <a ng-href="/"><i style="font-weight: bold; font-size: 50px;" class="mdi mdi-home text-success"> </i></a>
+
+                                    </span>
+
+                                </div><!--end auth-logo-box-->
+
+                                <form class="form-horizontal auth-form my-4">
+                                    <h4 class="text-center" style="margin-top:-30px"> Register for Daily Operational Meeting</h4>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <!--<label for="username">Username</label>-->
+                                                <div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize" >
+                                                        <i class="dripicons-user iconSize"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                </div>
+                                            </div><!--end form-group-->
+
+
+
+
+
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <!--<label for="mo_number">Mobile Number</label>-->
+                                                <div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="dripicons-phone iconSize"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" id="mo_number" placeholder="Enter Phone Number">
+                                                </div>
+                                            </div><!--end form-group-->
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <!--<label for="useremail">Email</label>-->
+                                                <div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="dripicons-mail iconSize"></i>
+                                                    </span>
+                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter Email">
+                                                </div>
+                                            </div><!--end form-group-->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="mo_number">Identity Type</label>-->
+                                                <!--<div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="fas fa-address-book iconSize"></i>
+                                                    </span>
+                                                    <select class="form-control" id="identityType">
+                                                        <option value="">Select Identity Type</option>
+                                                        <option value="Social Security Number">Social Security Number</option>
+                                                        <option value="Driving license">Driving license</option>
+                                                    </select>-->
+                                                    <!--<input type="text" class="form-control" id="EinNumber" placeholder="Enter Social Security Number">-->
+                                                <!--</div>
+                                            </div>--><!--end form-group-->
+
+                                            <div class="form-group">
+                                                <!--<label for="userpassword">Password</label>-->
+                                                <div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="dripicons-lock iconSize"></i>
+                                                    </span>
+                                                    <input type="{{InputType}}" class="form-control" ng-model="UserPassword"  id="userpassword" placeholder="password">
+                                                    <span class="auth-form-icon IconFixedSize" ng-click="PasswordHideAndShow()">
+                                                        <i class="{{PasswordIcon}} iconSize"></i>
+                                                    </span>
+
+                                                    <!--<span class="input-group-prepend">
+                                                        <button type="button" class="btn btn-gradient-primary"><i class="dripicons-lock"></i></button>
+                                                    </span>
+                                                    <input type="text"  id="userpassword" name="example-input3-group2" class="form-control" placeholder="Search">
+                                                    <span class="input-group-append">
+                                                        <button type="button" class="btn btn-gradient-primary"><i class="fa fa-eye"></i></button>
+                                                    </span>-->
+                                                </div>
+                                            </div><!--end form-group-->
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="mo_number">Identity Number</label>-->
+                                                <!--<div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="fas fa-text-height iconSize"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" id="IdentityNumber" placeholder="Identity Number">
+                                                </div>
+                                            </div>--><!--end form-group-->
+
+                                            <div class="form-group">
+                                                <!--<label for="conf_password">Confirm Password</label>-->
+                                                <div class="input-group mb-3">
+                                                    <span class="auth-form-icon IconFixedSize">
+                                                        <i class="dripicons-lock-open iconSize"></i>
+                                                    </span>
+                                                    <input type="password" ng-model="UserConfrimPassword" class="form-control" id="conf_password" ng-blur="PasswordConfrimValidate()" placeholder="Confirm Password">
+                                                </div>
+
+
+                                            </div><!--end form-group-->
+                                        </div>
+                                    </div>
+
+
+                                   
+                                  
+
+                                    <div class="row" style="margin-top:-20px;">
+                                        <div class="col-md-12">
+
+                                            <div class="form-group row mt-4">
+                                                <div class="col-sm-12">
+                                                    <div class="custom-control custom-switch switch-success">
+                                                        <input type="checkbox" class="custom-control-input" id="customSwitchSuccess">
+                                                        <label class="custom-control-label text-muted" for="customSwitchSuccess" style="font-size:12px;color:black;">By registering you agree to the Frogetor <a href="#" class="text-primary">Terms of Use</a></label>
+                                                    </div>
+                                                </div><!--end col-->
+                                            </div><!--end form-group-->
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12 mt-2">
+                                            <button class="btn btn-gradient-primary btn-round btn-block waves-effect waves-light" id="sa-warning2" ng-click="Register()">Register <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                        </div><!--end col-->
+                                    </div> <!--end form-group-->
+
+                                </form><!--end form-->
+                            </div><!--end /div-->
+
+                            <div class="m-3 text-center text-muted">
+                                <p class="">Already have an account ? <a ng-href="/Home/Login#/Login" class="text-primary ml-2">Log in</a></p>
+
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+
+    </div><!--end row-->
+
+    <!--<script src="../../Scripts/toastr.min.js"></script>-->
+
+    <script src="../Content/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="../Content/assets/pages/jquery.sweet-alert.init.js"></script>
+
+    <script>
+        
+        $("#username").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#mo_number").focus();
+                    e.preventDefault()
+                }
+
+               
+            }
+        );
+
+        $("#mo_number").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#useremail").focus();
+                    e.preventDefault()
+                }
+            }
+        );
+        
+        $("#useremail").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#identityType").focus();
+                    e.preventDefault()
+                }
+            }
+        );
+
+        $("#identityType").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#IdentityNumber").focus();
+                    e.preventDefault()
+                }
+            }
+        );
+
+        $("#IdentityNumber").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#userpassword").focus();
+                    e.preventDefault()
+                }
+            }
+        );
+
+        $("#userpassword").bind('keydown',
+            function (e) {
+                if (e.which == 9) {
+                    $("#conf_password").focus();
+                    e.preventDefault()
+                }
+            }
+        );
+
+      
+    </script>
+   
+</body>
+</html>

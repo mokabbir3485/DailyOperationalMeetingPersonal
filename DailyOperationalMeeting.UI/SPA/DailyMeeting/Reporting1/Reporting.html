@@ -1,0 +1,151 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Operational Meeting</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">DOM</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Reporting</a></li>
+                    <!--<li class="breadcrumb-item active">Battery Status</li>-->
+                </ol>
+            </div>
+            <h4 class="page-title">Reporting</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control mb-3" id="ddlEmployee" style="width: 100%; height:36px;" ng-model="ddlEmployee" ng-options="Employee.EmployeeName for Employee in EmployeeList track by Employee.EmployeeId" title="Search By Employee" placeholder="-- Search By Employee --">
+                        <option value="">-- Search By Employee --</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select id="ddlMeetingType" class="form-control" ng-model="ddlMeetingType" ng-options="MeetingType.MeetingTypeName for MeetingType in MeetingTypeList track by MeetingType.MeetingTypeId" title="Search By MeetingType" placeholder="-- Search By MeetingType --">
+                            <option value="">-- Search By Meeting Type --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select id="ddPriority" class="form-control" ng-model="ddlPriority" ng-options="Priority.PriorityName for Priority in PriorityList track by Priority.PriorityId" title="Search By Priority" placeholder="-- Search By Priority --">
+                            <option value="">-- Search By Priority --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select id="ddlStatus" class="form-control" ng-model="ddlStatus" ng-options="Status.StatusName for Status in StatusList track by Status.StatusId" ng-click="" title="Search By Status" placeholder="-- Search By Status --">
+                            <option value="">-- Search By Status --</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="From Date">
+                            <input class="form-control" type="text" placeholder="From Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="From Date" ng-model="FromDate" ng-change="test();">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group " data-toggle="tooltip" title="To Date">
+                            <input class="form-control" type="text" placeholder="To Data" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" title="To Data" ng-model="ToData">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group inputFieldHeight">
+                        <input type="text" id="SearchByKeyword" name="SearchByKeyword" title="Search By Keyword" class="form-control" ng-model="SearchByKeyword" placeholder="Search By Keyword" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <button id="btnSearch" class="btn btn-info" title="Search" ng-click="SalesOrderSearch();">
+                            <i class="fa fa-search-plus"></i>&nbsp;Search
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="row">
+                        <button id="btnSearch" ng-click="reloadBtn()" class="btn btn-danger" title="Reload">
+                            <i class="fa fa-refresh"></i>&nbsp;Clear
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="row_callback" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th class="t-cell-center">S/N</th>
+                                    <th class="t-cell-center">Meeting Date</th>
+                                    <th class="t-cell-center">Reference</th>
+                                    <th class="t-cell-center">Venue</th>
+                                    <th class="t-cell-center">Priority</th>
+                                    <th class="t-cell-center">Secretary</th>
+                                    <th class="t-cell-center"></th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                
+                                <tr ng-repeat="aMeetingMinutes in MeetingMinutesList">
+                                    <td class="t-cell-center">{{$index + 1}}</td>
+                                    <td class="t-cell-center">{{aMeetingMinutes.MeetingDate}}</td>
+                                    <td class="t-cell-center">{{aMeetingMinutes.MeetingReference}}</td>
+                                    <td class="t-cell-center">{{aMeetingMinutes.Venue}}</td>
+                                    <td class="t-cell-center">{{aMeetingMinutes.PriorityName}}</td>
+                                    <td class="t-cell-center">{{aMeetingMinutes.SecretaryName}}</td>
+
+                                    <td class="t-cell-center">
+                                        <button class="btn btn-primary" style="font-size: 13px; padding: 12.5px; width: 80px;"
+                                                ng-click="OpenReport(aMeetingMinutes.SalesOrderId)">
+                                            Report
+                                        </button>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->
+
+<script src="/Content/assets/pages/jquery.datatable.init.js"></script>
+<script>
+    var label = $('#row_callback_filter label').text();
+    console.log(label);
+</script>

@@ -1,0 +1,189 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+         .BtnWidth {
+            width: 100%;
+        /*    margin: 4px;*/
+        }
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+
+   
+</style>
+<form name="AddBatteryForm">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Operational Meeting</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Meeting</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Task Assign</a></li>
+
+                    </ol>
+                </div>
+                <h4 class="page-title">Task Assigner</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="container-fluid">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Task Assigner</h4>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select id="ddAssignBy" class="form-control" ng-model="ddlAssignBy" ng-options="AssignBy.AssignByName for AssignBy in AssignByList track by AssignBy.AssignById" ng-change="TaskAssign.AssignById = ddlAssignBy.AssignById; TaskAssign.AssignByName = ddlAssignBy.AssignByName;">
+                                    <option value="">Select Assign By</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select id="ddAssignFor" class="form-control" ng-model="ddlAssignFor" ng-options="AssignFor.AssignForName for AssignFor in AssignForList track by AssignFor.AssignForId" ng-change="TaskAssign.AssignForId = ddlAssignFor.AssignForId; TaskAssign.AssignForName = ddlAssignFor.AssignForName;">
+                                    <option value="">Select Assign For</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group inputFieldHeight">
+                                <input type="text" id="Topic" name="Topic" class="form-control" ng-model="TaskAssign.Topic" placeholder="Task Topic" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select id="ddPriority" class="form-control" ng-model="ddlPriority" ng-options="Priority.PriorityName for Priority in PriorityList track by Priority.PriorityId" ng-change="TaskAssign.PriorityId = ddlAssignFor.PriorityId; TaskAssign.PriorityName = ddlAssignFor.PriorityName;">
+                                    <option value="">Select Priority</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group inputFieldHeight">
+                                <textarea type="text" id="TaskDetails" name="TaskDetails" class="form-control" rows="1" ng-model="TaskAssign.TaskDetail" placeholder="Task Details"></textarea>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-success" style="padding:5px;" ng-click="Save()"> Save</button>
+                                </div>
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger" style="padding:5px;" ng-click="batteryReset()"> Reset</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-Info" style="padding:5px;" ng-click="FillData();"> Fill In Box</button>
+                        </div>
+
+                    </div>
+                    
+                    <br />
+                    <hr />
+                    <h3 class="mt-0 header-title mdi mdi-format-list-bulleted"> Task Assign List</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3 DivMargin" >
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-start" name="example-input1-group2" class="form-control" placeholder="Form Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-end" name="example-input1-group2" class="form-control" placeholder="To Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-search"></i></button>
+                                </span>
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-md-2 DivMargin ">
+                            <button class="btn btn-danger BtnWidth" style="width:100%" >Clear</button>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0 table-centered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">Assigner By</th>
+                                    <th class="text-center">Assigner For</th>
+                                    <th class="text-center">Topic</th>
+                                    <th class="text-center">Priority</th>
+                                    <th class="text-center">Task Details</th>
+                                    <th class="text-center" colspan="3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aTaskDetail in TaskDetailList track by aTaskDetail.TaskDetailId">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td class="text-center">{{aTaskDetail.AssignByName}}</td>
+                                    <td class="text-center">{{aTaskDetail.AssignForName}}</td>
+                                    <td class="text-center">{{aTaskDetail.Topic}}</td>
+                                    <td class="text-center">{{aTaskDetail.PriorityName}}</td>
+                                    <td class="text-center">{{aTaskDetail.TaskDetail}}</td>
+                                    <td class="text-center" style="border-right: hidden">
+                                        <button class="btn btn-success" ng-click="Sel()"> <i class="fa fa-edit"></i>Edit</button>
+
+                                    </td>
+                                    <td class="text-center" style="border-right:hidden">
+                                        <button class="btn btn-danger" ng-click="Del()"><i class="fa fa-trash"></i> Delete</button>
+                                    </td>
+                                    <td class="text-center" >
+                                        <button class="btn btn-primary" ng-click="Rpt()"><i class="fa fa-print"></i> Report</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table><!--end /table-->
+                    </div><!--end /tableresponsive-->
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+</form>
+
+<script>
+    
+    $("#BatteryCode").select2({
+        placeholder: "Battery Code",
+
+        dropdownAutoWidth: false
+    });
+
+    $("#BatteryLocation").select2({
+        placeholder: "Battery Location",
+        dropdownAutoWidth: false
+    });
+</script>

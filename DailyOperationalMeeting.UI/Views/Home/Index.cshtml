@@ -1,0 +1,481 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Daily Operational Meeting</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/vendors")*@
+    @Scripts.Render("~/bundles/spa")
+    @Scripts.Render("~/Content/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="A premium admin dashboard template by Mannatthemes" name="description" />
+    <meta content="Mannatthemes" name="author" />
+
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/logoBackLess.png">
+    @*<link href="../Content/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">*@
+
+    <!-- App css -->
+    <!-- App css -->
+    <link href="/Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="/Content/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/Content/assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="/Content/assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="/Content/assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+
+    <!-- App css -->
+    <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/toastr.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        #notificationLi {
+            height: 50% !important;
+        }
+        
+        @@media only screen and (max-width: 1030px) {
+
+            [class*="col-"] {
+                width: 100%;
+            }
+
+            #PowerUpLogoText {
+                display: none;
+            }
+            /*.left-sidenav {
+                display: none;
+            }*/
+        }
+
+        @@media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+            .rounded-circle {
+                margin-top: 15px;
+            }
+        }
+    </style>
+    <style>
+        .menuViewHide {
+            display: none;
+        }
+
+        .menuViewShow {
+            display: block;
+        }
+    </style>
+    <!-- For SignalR Start -->
+    <!-- JQuery Used From spa Bundle Version 1.10.2 -->
+    <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    @*<script src="~/signalr/hubs"></script>*@
+    <!-- For SignalR End -->
+
+
+
+</head>
+
+<body ng-app="AngularDemoApp">
+
+    <!-- Top Bar Start -->
+    <div class="topbar" ng-controller="IndexController">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="" class="logo">
+                <span>
+                    <img src="~/Content/assets/images/logoBackLess.png" style="height: 50px; width:50px;" alt="logo-small" class="logo-sm">
+                </span>
+
+                <span style="font-size:20px;" id="PowerUpLogoText">
+                    <strong id="LogoText">DOM </strong>
+                </span>
+            </a>
+        </div>
+        <!--end logo-->
+        <!-- Navbar -->
+        <nav class="navbar-custom" id="HideBatterycart">
+
+            <ul class="list-unstyled topbar-nav float-right mb-0">
+
+                <li class="dropdown notification-list">
+                    <a id="removeCount" class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" role="button" onclick="notificationBell()"
+                       aria-haspopup="false" aria-expanded="false">
+                        <i class="dripicons-bell noti-icon"></i>
+                        <span id="notiCount" class="badge badge-danger badge-pill noti-icon-badge"></span>
+                    </a>
+                    <div id="NotificationBell" class="dropdown-menu dropdown-menu-right dropdown-lg hide">
+                        <!-- item-->
+                        <h6 id="notiAll" class="dropdown-item-text">
+                            Notifications (0)
+                        </h6>
+                        <div id="notificationLi" class="slimscroll notification-list" ng-repeat="b in batteryStatus">
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                                <div class="notify-icon bg-success"><i class="mdi mdi-cart-outline"></i></div>
+                                <p class="notify-details">
+                                    Battery Status
+                                    <small class="text-muted">Location : {{b.location}}</small>
+                                    <small class="text-muted">Swap Station : {{b.swapStation}}</small>
+                                    <small class="text-muted">Charging Unit : {{b.chargingUnit}}</small>
+                                    <small class="text-muted">Battery : {{b.battery}}</small>
+                                    <small class="text-muted">Voltage : {{b.voltage}}</small>
+                                    <small class="text-muted">Amper : {{b.amper}}</small>
+                                </p>
+                            </a>
+
+                        </div>
+                        <!-- All-->
+                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
+                            View all <i class="fi-arrow-right"></i>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" onclick="profile()" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                        @*<img src="~/Content/assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle" />*@
+                        <img src="~/Content/CardImg/marc.jpg" alt="profile-user" class="rounded-circle" />
+                        <span class="ml-1 nav-user-name hidden-sm">Marc <i class="mdi mdi-chevron-down"></i> </span>
+                    </a>
+                    <div id="Profile" class="dropdown-menu dropdown-menu-right hide">
+                        <a class="dropdown-item" href="#/UserProfile"><i class="dripicons-user text-muted mr-2"></i> Profile</a>
+                        <a class="dropdown-item" href="#"><i class="dripicons-wallet text-muted mr-2"></i> My Wallet</a>
+                        @*<a class="dropdown-item" href="#"><i class="dripicons-gear text-muted mr-2"></i> Settings</a>*@
+                        <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted mr-2"></i> Lock screen</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" onclick="Home()"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>
+                    </div>
+                </li>
+            </ul><!--end topbar-nav-->
+
+            <ul class="list-unstyled topbar-nav mb-0">
+                <li>
+                    <button class="button-menu-mobile nav-link waves-effect waves-light" onclick="HideTab()">
+                        <i class="dripicons-menu nav-icon"></i>
+                    </button>
+
+                </li>
+                <li>
+                    <button class="button-menu-mobile nav-link waves-effect waves-light" @*style="margin-top: 16px;"*@ onclick="Home()">
+                        <i class="dripicons-home" style="font-size:large"></i>
+                    </button>
+                </li>
+                <li class="hide-phone app-search">
+                    <form role="search" class="">
+                        <input type="text" placeholder="Search..." class="form-control">
+                        <a href=""><i class="fas fa-search" style="margin-top:10px;"></i></a>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <!-- end navbar-->
+    </div>
+    <!-- Top Bar End -->
+
+    <div class="page-wrapper">
+        <!-- Left Sidenav -->
+        <div class="left-sidenav">
+            <ul class="metismenu left-sidenav-menu">
+                <li id="DailyMeeting">
+                    <a href="javascript: void(0);"><i class="ti-user"></i><span>DOM</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li class="nav-item" id="DashboardView"><a href="#/Dashboard" class="nav-link"><i class="ti-control-record"></i>Dashboard</a></li>
+                        <li class="nav-item" id="MeetingMinutesView"><a href="#/MeetingMinutes" class="nav-link"><i class="ti-control-record"></i>Meeting Minutes</a></li>
+                        @*<li class="nav-item" ng-class="TaskAssignerView"><a href="#/TaskAssigner" class="nav-link"><i class="ti-control-record"></i>Task Assigner</a></li>*@
+                        <li class="nav-item" id="MyTaskView"><a href="#/MyTask" class="nav-link"><i class="ti-control-record"></i>My Task</a></li>
+                        <li class="nav-item" id="InboxView"><a href="#/Inbox" class="nav-link"><i class="ti-control-record"></i>Inbox</a></li>
+                        <li class="nav-item" id="ReportingView"><a href="#/Reporting" class="nav-link"><i class="ti-control-record"></i>Reporting</a></li>
+
+                        @*<li class="nav-item" ng-class="MeetingMinutesReportView"><a href="#/MeetingMinutesReport" class="nav-link"><i class="ti-control-record"></i>Meeting Minutes</a></li>*@
+
+                        @*<li class="nav-item" ng-class="UserRoleView"><a href="#/UserRole" class="nav-link"><i class="ti-control-record"></i>User Role</a></li>*@
+                        @*<li class="nav-item" ng-class="UserManageView"><a href="#/UserManage" class="nav-link"><i class="ti-control-record"></i>User Manage</a></li>*@
+                        @*<li class="nav-item" ng-class="ApproveRegView"><a class="nav-link" href="#/ApproveReg"><i class="ti-control-record"></i>Approve Reg.</a></li>*@
+                        <li class="nav-item" hidden><a class="nav-link" href=""> </a></li>
+                    </ul>
+                </li>
+                @*<li id="User">
+                        <a href=""><i class="fa fa-user-alt"></i><span>User</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item" ng-class="UserDashboardView"><a class="nav-link" href="#/UserDashboard"><i class="ti-control-record"></i>Dashboard</a></li>
+                            <li class="nav-item" ng-class="SwapStationMapMainView"><a class="nav-link" href="#/SwapStationMapMain"><i class="ti-control-record"></i>Swap Station Map</a></li>
+                            <li class="nav-item" ng-class="BatteryBookingView"><a class="nav-link" href="#/BatteryBooking"><i class="ti-control-record"></i>Battery Booking</a></li>
+                            <li class="nav-item" ng-class="BatteryStatus"><a class="nav-link" href="#/UserBatteryStatus"><i class="ti-control-record"></i>Battery Status</a></li>
+                            <li class="nav-item" hidden><a class="nav-link" href=""> </a></li>
+                        </ul>
+                    </li>
+                    <li id="Care" style="width:240px;">
+                        <a href="javascript: void(0);"><i class="fas fa-headphones"></i><span>Customer Care</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item" ng-class="CustomerCareDashboardView"><a class="nav-link" href="#/Dashboard"><i class="ti-control-record"></i>Dashboard</a></li>
+                            <li class="nav-item" ng-class="EnableDisableSwapStationView"><a class="nav-link" href="#/EnableDisableSwapStation"><i class="ti-control-record"></i>Enable /Disable Swap Station</a></li>
+                            <li class="nav-item" ng-class="LockUnlockChargingUnitView"><a class="nav-link" href="#/LockUnlockChargingUnit"><i class="ti-control-record"></i>Doors Lock/Unlock </a></li>
+                            <li class="nav-item" ng-class="EnableDisableChargingUnitView"><a class="nav-link" href="#/EnableDisableChargingUnit"><i class="ti-control-record"></i>Enable/Disable Charging Unit</a></li>
+                            <li class="nav-item" ng-class="BatteryStatusView"><a class="nav-link" href="#/AdminBatteryStatus"><i class="ti-control-record"></i>Battery Status</a></li>
+                            <li class="nav-item" ng-class="ChargingPortErrorView"><a class="nav-link" href="#/ChargingPortError"><i class="ti-control-record"></i>Charging Port Error </a></li>
+                            <li class="nav-item" hidden><a class="nav-link" href=""> </a></li>
+                        </ul>
+                    </li>*@
+
+                <li hidden>
+                    <a href="javascript: void(0);"><i class="fa fa-print"></i><span>Report</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li class="nav-item"><a class="nav-link" href=""><i class="ti-control-record"></i>Booking Report</a></li>
+                        <li class="nav-item"><a class="nav-link" href=""><i class="ti-control-record"></i>Payment Report</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+
+
+        </div>
+        <!-- end left-sidenav-->
+        <!-- Page Content-->
+        <div class="page-content">
+
+            <div class="container-fluid">
+
+                <div class="ng-view" autoscroll="true"></div>
+            </div>
+
+            @*@RenderBody();*@
+            <footer class="main-footer footer text-center text-sm-left">
+                &copy; 2022 All rights Reserved. RTL <span class="text-muted d-none d-sm-inline-block float-right">Develop  by RTL Team</span>
+            </footer><!--end footer-->
+        </div>
+        <!-- end page content -->
+    </div>
+    @*<script src="/Content/assets/js/jquery.min.js"></script>*@
+    <script src="/Content/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/Content/assets/js/metisMenu.min.js"></script>
+    <script src="/Content/assets/js/waves.min.js"></script>
+
+    <script src="/Content/assets/js/jquery.slimscroll.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/Content/assets/plugins/select2/select2.min.js"></script>
+    <script src="/Content/assets/plugins/moment/moment.js"></script>
+    <script src="/Content/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    @*<script src="/Content/assets/plugins/select2/select2.min.js"></script>*@
+    <script src="/Content/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="/Content/assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+    <script src="/Content/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="/Content/assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+
+    <script src="/Content/assets/pages/jquery.forms-advanced.js"></script>
+
+    <script src="/Scripts/toastr.min.js"></script>
+
+    <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="/Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+
+
+    <!-- Responsive examples -->
+    <script src="/Content/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="/Content/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="/Content/assets/pages/jquery.datatable.init.js"></script>
+
+    <script src="/Content/assets/js/app.js"></script>
+    <script>
+
+        //(function () {
+        //    app.controller('NotificationController', function ($scope) {
+        //        //$scope.name = 'Guest';
+        //        //$scope.message = '';
+        //        //$scope.messages = [];
+        //        $scope.batteryStatus = [];
+        //        $scope.notificationHub = null;
+        //        $scope.notificationHub = $.connection.notificationHub;
+        //        $.connection.hub.start().done(function () {
+        //             alert("SignalR Connected!!!!")
+        //        });
+        //        //$scope.notificationHub.client.broadcastMessage = function (name, message) {
+
+        //        //    $scope.notificationObj = {};
+        //        //    $scope.notificationObj.name = name;
+        //        //    $scope.notificationObj.message = message;
+        //        //    //$scope.messages.name = name;
+        //        //    //$scope.messages.message = message
+        //        //    $scope.messages.push($scope.notificationObj);
+        //        //    /*$scope.messages = [{ name: 'Belal', message: 'Hi' }, { name: 'Shovo', message: 'How are you' }];*/
+        //        //    $('#notiCount').text($scope.messages.length);
+        //        //    $('#notiAll').text('Notifications (' + $scope.messages.length + ')');
+        //        //    $scope.$apply();
+        //        //};
+        //        // $scope.messages = [{ name: 'Belal', message: 'Hi' }, { name: 'Shovo', message: 'How are you' }];
+
+        //        $scope.notificationHub.client.broadcastBatteryStatus = function (location, swapStation, chargingUnit, battery, voltage, amper) {
+
+        //            $scope.batteryStatusObj = {};
+        //            $scope.batteryStatusObj.location = location;
+        //            $scope.batteryStatusObj.swapStation = swapStation;
+        //            $scope.batteryStatusObj.chargingUnit = chargingUnit;
+        //            $scope.batteryStatusObj.battery = battery;
+        //            $scope.batteryStatusObj.voltage = voltage;
+        //            $scope.batteryStatusObj.amper = amper;
+        //            //$scope.messages.name = name;
+        //            //$scope.messages.message = message
+        //            $scope.batteryStatus.push($scope.batteryStatusObj);
+        //            console.log($scope.batteryStatus);
+        //            /*$scope.messages = [{ name: 'Belal', message: 'Hi' }, { name: 'Shovo', message: 'How are you' }];*/
+        //            $('#notiCount').text($scope.batteryStatus.length);
+        //            $('#notiAll').text('Notifications (' + $scope.batteryStatus.length + ')');
+        //            $scope.$apply();
+        //        };
+
+        //    });
+        //})();
+
+
+
+
+        $('#removeCount').click(function () {
+            $('#notiCount').text('');
+
+        });
+
+        function navBarShow() {
+            $('.left-sidenav').css("display", "block");
+        }
+        $('.note-popover').css("display", "none");
+
+        $(document).click(function (evt) {
+            if (evt.target.id == "Profile") {
+                return;
+            } else {
+                $('#Profile').addClass('hide').removeClass('show');
+                $('#NotificationBell').addClass('hide').removeClass('show');
+            }
+        });
+        function profile() {
+            var className = $('#Profile').attr('class');
+            var mth = className.match(/hide/g);
+            if (mth == 'hide') {
+                $('#Profile').addClass('show').removeClass('hide');
+                $('#NotificationBell').addClass('hide').removeClass('show');
+            } else {
+                $('#Profile').addClass('hide').removeClass('show');
+
+            }
+
+        }
+
+        function notificationBell() {
+            var className = $('#NotificationBell').attr('class');
+            var mth = className.match(/hide/g);
+            if (mth == 'hide') {
+                $('#NotificationBell').addClass('show').removeClass('hide');
+                $('#Profile').addClass('hide').removeClass('show');
+            } else {
+                $('#NotificationBell').addClass('hide').removeClass('show');
+            }
+
+        }
+
+
+
+        function Home() {
+            window.location = '/';
+        }
+        function HideTab() {
+
+            $(".left-sidenav").toggle();
+        }
+        (function ($) {
+
+            'use strict';
+
+            function initSlimscroll() {
+                $('.slimscroll').slimscroll({
+                    height: 'auto',
+                    position: 'right',
+                    size: "7px",
+                    color: '#e0e5f1',
+                    opacity: 1,
+                    wheelStep: 5,
+                    touchScrollStep: 50
+                });
+            }
+
+
+            function initMetisMenu() {
+                //metis menu
+                $(".metismenu").metisMenu();
+            }
+
+            function initLeftMenuCollapse() {
+                // Left menu collapse
+                $('.button-menu-mobile').on('click', function (event) {
+                    event.preventDefault();
+                    $("body").toggleClass("enlarge-menu");
+                    initSlimscroll();
+                });
+            }
+
+            function initEnlarge() {
+                if ($(window).width() < 1025) {
+                    $('body').addClass('enlarge-menu');
+                } else {
+                    if ($('body').data('keep-enlarged') != true)
+                        $('body').removeClass('enlarge-menu');
+                }
+            }
+
+            function initTooltipPlugin() {
+                $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip()
+            }
+
+
+
+            function initActiveMenu() {
+                // === following js will activate the menu in left side bar based on url ====
+                $(".left-sidenav a").each(function () {
+                    var pageUrl = window.location.href.split(/[?#]/)[0];
+                    if (this.href == pageUrl) {
+                        $(this).addClass("active");
+                        $(this).parent().addClass("active"); // add active to li of the current link
+                        $(this).parent().parent().addClass("in");
+                        $(this).parent().parent().addClass("mm-show");
+                        $(this).parent().parent().parent().addClass("mm-active");
+                        $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
+                        $(this).parent().parent().parent().addClass("active");
+                        $(this).parent().parent().parent().parent().addClass("mm-show"); // add active to li of the current link
+                        $(this).parent().parent().parent().parent().parent().addClass("mm-active");
+
+                    }
+                });
+            }
+
+
+
+            function init() {
+                initSlimscroll();
+                initMetisMenu();
+                initLeftMenuCollapse();
+                initEnlarge();
+                initTooltipPlugin();
+                initActiveMenu();
+                Waves.init();
+            }
+
+            init();
+
+        })(jQuery)
+
+    </script>
+
+</body>

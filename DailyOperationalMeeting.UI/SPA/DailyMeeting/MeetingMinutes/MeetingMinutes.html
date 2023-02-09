@@ -1,0 +1,300 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            /*    margin: 4px;*/
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+
+        @media print {
+            .breadcrumb-item {
+                visibility: hidden;
+            }
+
+          
+        }
+    }
+</style>
+
+<form name="MeetingMinutesForm">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Daily Operational Meeting</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">DOM</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Meeting Minutes</a></li>
+
+                    </ol>
+                </div>
+                <h4 class="page-title">Meeting Minutes</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="container-fluid">
+
+        <div class="col-lg-12">
+            <div class="">
+                <div class="">
+                    <!--<h4 class="header-title">Meeting Minutes</h4>-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <!--<input class="form-control" type="datetime-local" title="Meeting Date Time" ng-model="MeetingDateTime" ng-change="test();" id="example-datetime-local-input">-->
+                                        <input class="form-control" type="date" title="Meeting Date" ng-model="MeetingMinutes.meeting_date" readonly ng-change="test();">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <input class="form-control" type="time" title="Start Time" value="{{MeetingMinutes.start_timeStr}}" ng-model="MeetingMinutes.start_time" ng-change="test();">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <input class="form-control" type="time" title="End Time" value="{{MeetingMinutes.end_timeStr}}" ng-model="MeetingMinutes.end_time" ng-change="test();">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group inputFieldHeight">
+                                        <input type="text" id="MeetingReference" name="MeetingReference" class="form-control" ng-model="MeetingMinutes.meeting_reference" title="Meeting Reference" placeholder="Meeting Reference" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group inputFieldHeight">
+                                        <input type="text" id="Venue" name="Venue" class="form-control" ng-model="MeetingMinutes.venue" placeholder="Venue" />
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-md-6">
+                                    <select class="form-control mb-3" id="ddlSecretary" style="width: 100%; height:36px;" ng-model="ddlSecretary" ng-options="Secretary.secretary_name for Secretary in SecretaryList track by Secretary.secretary_pin" ng-change="test();" title="Select Secretary" placeholder="-- Select Secretary --">
+                                        <option value="">-- Select Secretary --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select class="form-control mb-3 " id="ddlAttendees" ng-model="ddlAttendees" ng-options="Attendee.attendee_name for Attendee in AttendeesList track by Attendee.attendee_pin" ng-click="test();" style="width: 100%" multiple="multiple" data-placeholder="-- Select Attendees --">
+                                        <!--option value="">Select Attendees</option>-->
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control mb-3 " id="ddlApologies" ng-model="ddlApologies" ng-options="Apologie.apologie_name for Apologie in ApologiesList track by Apologie.apology_pin" ng-click="test();" style="width: 100%" multiple="multiple" data-placeholder="-- Select Apologies --">
+                                        <!--option value="">Select Attendees</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select class="form-control mb-3" id="ddlEmployee" style="width: 100%; height:36px;" ng-model="ddlEmployee" ng-options="Employee.employee_name for Employee in EmployeeList track by Employee.employee_pin" ng-change="test();" title="Select Employee" placeholder="-- Select Employee --">
+                                        <option value="">-- Select Employee --</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group inputFieldHeight">
+                                        <textarea type="text" id="agenda_item" name="agenda_item" class="form-control" rows="1" ng-model="agenda_item" placeholder="Agenda Item" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group inputFieldHeight">
+                                        <textarea type="text" id="discussion_point" name="discussion_point" class="form-control" rows="1" ng-model="discussion_point" placeholder="Discussion Points" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group inputFieldHeight">
+                                        <textarea type="text" id="actions" name="actions" class="form-control" rows="1" ng-model="actions" placeholder="actions" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select id="ddlType" class="form-control" ng-model="ddlType" ng-options="Type.TypeName for Type in TypeList track by Type.task_type_id" ng-change="MeetingMinutes.task_type_id = ddlType.task_type_id; MeetingMinutes.TypeName = ddlMeetingType.TypeName;">
+                                            <option value="">-- Select Type --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select id="ddPriority" class="form-control" ng-model="ddlPriority" ng-options="Priority.task_priority for Priority in PriorityList track by Priority.priority_id">
+                                            <option value="">-- Select Priority --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control mb-3 " id="ddlDepartment" ng-model="ddlDepartment" ng-options="Department.department_name for Department in DepartmentList track by Department.dept_id" ng-click="test();" style="width: 100%" multiple="multiple" data-placeholder="-- Select Concern Dept.  --">
+                                        <!--option value="">Select Attendees</option>-->
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="date" ng-model="duedate" title="Due Date" id="example-date-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-11">
+
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-gradient-primary" style="padding:5px;" ng-click="AddMeetingMinutes();"> Add</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered mb-0 table-centered" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">S/N</th>
+                                                    <th class="text-center">Agenda Item</th>
+                                                    <th class="text-center">Discussion Points</th>
+                                                    <th class="text-center">actions</th>
+                                                    <th class="text-center">Type</th>
+                                                    <th class="text-center">Priority</th>
+                                                    <th class="text-center">Due Date</th>
+                                                    <th class="text-center">Department</th>
+                                                    <th class="text-center">Employee</th>
+                                                    <th class="text-center"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="aMeetingMinutes in MeetingMinutesList track by $index">
+                                                    <td class="text-center">{{$index + 1}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.agenda_item}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.discussion_point}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.actions}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.TypeName}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.PriorityName}}</td>
+                                                    <td class="text-center">{{ aMeetingMinutes.duedate | date : 'MMM d, yyyy' }}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.DepartmentName}}</td>
+                                                    <td class="text-center">{{aMeetingMinutes.EmployeeName}}</td>
+
+                                                    <td class="text-center">
+                                                        <button class="btn btn-gradient-danger" ng-click="RemoveMeetingMinutes(aMeetingMinutes)">X</button>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table><!--end /table-->
+                                    </div><!--end /tableresponsive-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                                    <div class="row">
+                                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <button class="btn btn-success" style="padding:5px;" ng-click="SaveMeetingMinutes()"> Save</button>
+                                        </div>
+                                        <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <button class="btn btn-danger" style="padding:5px;" ng-click="Reset()"> Reset</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+</form>
+
+
+<script>
+
+    $("#ddlSecretary").select2({
+        placeholder: "-- Select Secretary --",
+        dropdownAutoWidth: false,
+        width: 'resolve',
+        allowClear: true
+    });
+
+    $("#ddlAttendees").select2({
+        placeholder: "-- Select Attendees --",
+        dropdownAutoWidth: false,
+        width: 'resolve',
+        allowClear: true,
+        tags: true
+    });
+    $("#ddlApologies").select2({
+        placeholder: "-- Select Apologies --",
+        dropdownAutoWidth: false,
+        width: 'resolve',
+        allowClear: true,
+        tags: true
+    });
+    $("#ddlDepartment").select2({
+        placeholder: "-- Select Concern Department  --",
+        dropdownAutoWidth: false,
+        width: 'resolve',
+        allowClear: true
+    });
+    //$('#ddlAttendees').select2();
+    toastr.options = {
+        "allowHtml": true,
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        //"positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    //toastr.options = {
+    //    "allowHtml": true,
+    //    "closeButton": true,
+    //    "debug": false,
+    //    "newestOnTop": false,
+    //    "progressBar": true,
+    //    "positionClass": "toast-top-center",
+    //    "preventDuplicates": false,
+    //    "onclick": null,
+    //    "showDuration": "300",
+    //    "hideDuration": "1000",
+    //    "timeOut": "5000",
+    //    "extendedTimeOut": "1000",
+    //    "showEasing": "swing",
+    //    "hideEasing": "linear",
+    //    "showMethod": "fadeIn",
+    //    "hideMethod": "fadeOut"
+    //}
+</script>

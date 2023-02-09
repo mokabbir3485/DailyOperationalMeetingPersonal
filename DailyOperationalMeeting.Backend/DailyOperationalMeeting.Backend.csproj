@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3BD6F84-20F5-4199-8A65-99D5E4BD7294}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SecurityEntity</RootNamespace>
+    <AssemblyName>SecurityEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbExecutor\Common.cs" />
+    <Compile Include="DbExecutor\DBExecutor.cs" />
+    <Compile Include="DbExecutor\DBUtility.cs" />
+    <Compile Include="DbExecutor\error_Log.cs" />
+    <Compile Include="DbExecutor\error_LogBLL.cs" />
+    <Compile Include="DbExecutor\error_LogDAO.cs" />
+    <Compile Include="DbExecutor\IEntityBase.cs" />
+    <Compile Include="DbExecutor\Parameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_EmployeeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_Task_typeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\Facade.cs" />
+    <Compile Include="SECURITY\SecurityBLL\InboxBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\LoginBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\MeetingMinutesBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\MyTaskBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_PermissionBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_PermissionDetailBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_RoleBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenDetailBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenLockBLL.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_EmployeeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_Task_typeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\InboxDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\LoginDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\MeetingMinutesDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\MyTaskDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ModuleDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_PermissionDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_PermissionDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_RoleDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenLockDAO.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Employee.cs" />
+    <Compile Include="SECURITY\SecurityEntity\Inbox.cs" />
+    <Compile Include="SECURITY\SecurityEntity\Login.cs" />
+    <Compile Include="SECURITY\SecurityEntity\MeetingMinutes.cs" />
+    <Compile Include="SECURITY\SecurityEntity\MyTask.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Module.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Permission.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_PermissionDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Role.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Screen.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_ScreenDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_ScreenLock.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_User.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Task_type.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
